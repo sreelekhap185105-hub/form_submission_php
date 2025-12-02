@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compact Application Form</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --accent:#2ea6ff;
+    --accent2:#63c2ff;
+    --muted:#64748b;
+    --text:#0b2540;
+    --bg:#eaf6ff;
+    --card:#ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;           /* try to fit everything in one view */
+  }
+
+  .form-card {
+    width:880px;
+    background:var(--card);
+    padding:14px 22px 12px;
+    border-radius:12px;
+    box-shadow:0 8px 28px rgba(15,23,42,0.12);
+    border:1px solid rgba(46,166,255,0.2);
+  }
+
+  h2 {
+    margin:0 0 4px;
+    font-size:20px;
+    font-weight:700;
+    color:var(--text);
+    text-align:center;
+  }
+
+  p.subtitle {
+    margin:0 0 10px;
+    color:var(--muted);
+    font-size:12px;
+    text-align:center;
+  }
+
+  form {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 14px;
+    align-items:start;
+  }
+
+  .full { grid-column:1 / -1; }
+
+  label {
+    font-size:12px;
+    margin-bottom:2px;
+    display:block;
+    color:var(--text);
+    font-weight:500;
+  }
+
+  input, select, textarea {
+    width:100%;
+    padding:7px 10px;
+    border-radius:7px;
+    border:1px solid #cbd5e1;
+    font-size:13px;
+    background:#f8fbff;
+    outline:none;
+  }
+
+  textarea {
+    height:46px;     /* much shorter */
+    resize:none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color:var(--accent);
+    box-shadow:0 0 0 1px rgba(46,166,255,0.2);
+  }
+
+  .checkboxes {
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+  }
+
+  .checkboxes label {
+    background:#eef7ff;
+    padding:4px 8px;
+    border-radius:6px;
+    font-size:12px;
+    border:1px solid rgba(46,166,255,0.3);
+    cursor:pointer;
+  }
+
+  .checkboxes input {
+    margin-right:4px;
+  }
+
+  .actions {
+    grid-column:1 / -1;
+    display:flex;
+    justify-content:flex-end;
+    margin-top:4px;
+  }
+
+  .btn {
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    padding:8px 16px;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:13px;
+  }
+
+  .btn.secondary {
+    background:#ffffff;
+    border:1px solid #cbd5e1;
+    color:var(--muted);
+    margin-right:6px;
+  }
+
+  /* On small screens we allow scroll as a fallback */
+  @media(max-width:768px){
+    body {
+      height:auto;
+      padding:16px 0;
+      align-items:flex-start;
+    }
+    .form-card { width:94%; }
+    form { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="form-card">
+  <h2>Application Form</h2>
+  <p class="subtitle">Compact layout designed to fit in one screen.</p>
+
+  <form id="appForm" action="submit.php" method="POST">
+    <div>
+      <label>First Name *</label>
+      <input type="text" name="first_name" required>
+    </div>
+
+    <div>
+      <label>Last Name *</label>
+      <input type="text" name="last_name" required>
+    </div>
+
+    <div>
+      <label>Email *</label>
+      <input type="email" name="email" required>
+    </div>
+
+    <div>
+      <label>Phone</label>
+      <input type="tel" name="phone">
+    </div>
+
+    <div>
+      <label>Date of Birth</label>
+      <input type="date" name="dob">
+    </div>
+
+    <div>
+      <label>Gender</label>
+      <select name="gender">
+        <option value="">Prefer not to say</option>
+        <option>Female</option>
+        <option>Male</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="full">
+      <label>Address</label>
+      <textarea name="address"></textarea>
+    </div>
+
+    <div>
+      <label>Highest Qualification</label>
+      <select name="qualification">
+        <option value="">Select</option>
+        <option>B.E / B.Tech</option>
+        <option>BSc</option>
+        <option>Diploma</option>
+        <option>12th / PU</option>
+        <option>Others</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Course / Position Applied</label>
+      <input type="text" name="course">
+    </div>
+
+    <div class="full">
+      <label>Skills & Interests</label>
+      <div class="checkboxes">
+        <label><input type="checkbox" name="skills[]" value="HTML">HTML</label>
+        <label><input type="checkbox" name="skills[]" value="CSS">CSS</label>
+        <label><input type="checkbox" name="skills[]" value="JavaScript">JavaScript</label>
+        <label><input type="checkbox" name="skills[]" value="Python">Python</label>
+        <label><input type="checkbox" name="skills[]" value="UI Design">UI Design</label>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="reset" class="btn secondary">Reset</button>
+      <button type="submit" class="btn">Submit Application</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
